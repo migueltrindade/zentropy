@@ -107,8 +107,38 @@
       <?php print render($page['header']); ?>
 
       <?php if ($main_menu): ?>
-        <p id="skip-link"><em><a href="#navigation">Skip to Navigation</a></em> &darr;</p> 
+        <nav id="main-menu" role="navigation">
+        <?php print theme('links__system_main_menu', array(
+          'links' => $main_menu,
+          'attributes' => array(
+            'id' => 'main-menu-links',
+            'class' => array('links', 'clearfix'),
+          ),
+          'heading' => array(
+            'text' => t('Main menu'),
+            'level' => 'h2',
+            'class' => array('element-invisible'),
+          ),
+        )); ?>
+        </nav><!-- /#navigation -->
       <?php endif; ?>
+      
+    <?php if ($secondary_menu): ?>
+      <nav id="secondary-menu" role="navigation">
+        <?php print theme('links__system_secondary_menu', array(
+          'links' => $secondary_menu,
+          'attributes' => array(
+            'id' => 'secondary-menu-links',
+            'class' => array('links', 'inline', 'clearfix'),
+          ),
+          'heading' => array(
+            'text' => t('Secondary menu'),
+            'level' => 'h2',
+            'class' => array('element-invisible'),
+          ),
+        )); ?>
+      </nav> <!-- /#secondary-menu -->
+    <?php endif; ?>
 
       </div><!-- /.section -->
     </header><!-- /#header -->
@@ -145,15 +175,6 @@
         <?php print $feed_icons; ?>
         </div><!-- /.section -->
       </div><!-- /#content -->
-
-      <?php if ($main_menu): ?>
-        <nav id="navigation" role="navigation">
-          <div class="section">
-          <?php print theme('links__system_main_menu', array('links' => $main_menu, 'attributes' => array('id' => 'main-menu', 'class' => array('links', 'clearfix')), 'heading' => t('Main menu'))); ?>
-          <?php print theme('links__system_secondary_menu', array('links' => $secondary_menu, 'attributes' => array('id' => 'secondary-menu', 'class' => array('links', 'clearfix')), 'heading' => t('Secondary menu'))); ?>
-          </div><!-- /.section -->
-        </nav><!-- /#navigation -->
-      <?php endif; ?>
 
       <?php if ($page['sidebar_first']): ?>
         <aside id="sidebar-first" class="column sidebar" role="complementary">

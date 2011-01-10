@@ -65,6 +65,7 @@ function zentropy_preprocess_html(&$vars) {
 		list($section, ) = explode('/', $path, 2);
 		$vars['classes_array'][] = zentropy_id_safe('page-'. $path);
 		$vars['classes_array'][] = zentropy_id_safe('section-'. $section);
+		// TODO add template suggestion
 		//$vars['template_files'][] = "page-section-" . $section;
 		
 		if (arg(0) == 'node') {
@@ -82,8 +83,6 @@ function zentropy_preprocess_html(&$vars) {
 			}
 		}
 	}
-  
-#  krumo($vars);
 }
 
 function zentropy_preprocess_page(&$vars) {

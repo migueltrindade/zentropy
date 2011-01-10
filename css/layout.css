@@ -11,7 +11,8 @@
 #content        { background: #eee; }
 #sidebar-first  { background: #ccf; }
 #sidebar-second { background: #fcc; }
-#navigation     { background: #ffc; }
+#main-menu      { background: #ffc; }
+#secondary-menu { background: #fcf; }
 #header         { background: #cff; }
 #footer         { background: #cfc; }
 
@@ -74,21 +75,4 @@
   float: right;
   width: 160px;          /* RC width */
   margin-left: -160px;   /* RC width */
-}
-
-/* Navigation Styles */
-
-.with-navigation #content,
-.with-navigation #sidebar-first,
-.with-navigation #sidebar-second {
-  margin-top: 6em;       /* NAV height */
-}
-
-#navigation {
-  padding-top: 0.5em;    /* Just to center the content */
-  height: 5.5em;         /* padding + height = NAV height */
-}
-
-#navigation ul.links li {
-  display: inline;
 }

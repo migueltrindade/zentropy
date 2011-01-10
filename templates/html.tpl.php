@@ -70,7 +70,7 @@
   <!-- Javascript at the bottom for fast page loading -->
   <?php print $scripts; ?>
   
-  <?php if (!user_is_logged_in() && theme_get_setting('ga_enable')):?>
+  <?php if (!user_is_logged_in() && theme_get_setting('ga_enable')) :?>
   <!-- Google Analytics -->
   <script type="text/javascript"> 
     <!--//--><![CDATA[//><!--
@@ -86,7 +86,7 @@
     } catch(err) {}
     //--><!]]>
   </script> 
-  <?php endif;?>
+  <?php endif; ?>
   
 </body>
 </html>

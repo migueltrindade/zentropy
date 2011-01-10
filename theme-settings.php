@@ -46,6 +46,8 @@ function zentropy_form_system_theme_settings_alter(&$form, &$form_state) {
 
   /**
    * Google Analytics settings
+   * TODO add tracking per role options
+   * TODO add descriptions to fields
    */
   $form['ga'] = array(
    '#type' => 'fieldset',
