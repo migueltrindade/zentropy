@@ -44,7 +44,8 @@ function zentropy_preprocess_html(&$vars) {
   $has_main_menu = theme_get_setting('toggle_main_menu');
   $has_secondary_menu = theme_get_setting('toggle_secondary_menu');
   
-  // Adding classes whether #navigation is here or not
+  /* Add extra classes to body for advanced theming */
+  
   if ($has_main_menu or $has_secondary_menu) {
     $vars['classes_array'][] = 'with-navigation';
   }
@@ -70,8 +71,6 @@ function zentropy_preprocess_html(&$vars) {
     $vars['classes_array'][] = 'footer-columns';
   }
   
-  /* Add extra classes to body for advanced theming */
-  
   if ($vars['is_admin']) {
     $vars['classes_array'][] = 'admin';
   }
@@ -79,12 +78,14 @@ function zentropy_preprocess_html(&$vars) {
 	if (!$vars['is_front']) {
 		// Add unique classes for each page and website section
 		$path = drupal_get_path_alias($_GET['q']);
-		list($section, ) = explode('/', $path, 2);
-		$vars['classes_array'][] = zentropy_id_safe('page-'. $path);
+		list($section, $page_name) = explode('/', $path, 2);
+		$vars['classes_array'][] = zentropy_id_safe('page-'. $page_name);
 		$vars['classes_array'][] = zentropy_id_safe('section-'. $section);
-		// TODO add template suggestion
-		//$vars['template_files'][] = "page-section-" . $section;
 		
+		// add template suggestions
+		$vars['theme_hook_suggestions'][] = "page__section__" . $section;
+		$vars['theme_hook_suggestions'][] = "page__" . $page_name;
+
 		if (arg(0) == 'node') {
 			if (arg(1) == 'add') {
 				if ($section == 'node') {
