@@ -1,8 +1,6 @@
 /**
  * Zentropy javascript core
  *
- * @author Alex Weber <alexweber.com.br>
- *
  * - Provides frequently used extensions to base javascript objects
  * - jQuery browser detection tweak
  * - Define functions used in events
