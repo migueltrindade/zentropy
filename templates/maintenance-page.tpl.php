@@ -117,21 +117,15 @@
   <![endif]-->
   
   <?php if (!user_is_logged_in() && theme_get_setting('ga_enable')) :?>
-  <!-- Google Analytics -->
-  <script type="text/javascript"> 
+  <!-- Google Analytics : mathiasbynens.be/notes/async-analytics-snippet -->
+  <script type="text/javascript">
     <!--//--><![CDATA[//><!--
-    try {
-      var _gaq = [['_setAccount', '<?php echo theme_get_setting('ga_trackingcode');?>'], ['_trackPageview']];
-      (function(d, t) {
-        var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-            g.async = true;
-            g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g, s);
-      })(document, 'script');
-    } catch(err) {}
+    var _gaq=[['_setAccount','<?php echo theme_get_setting('ga_trackingcode');?'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
     //--><!]]>
-  </script> 
+  </script>
   <?php endif; ?>
 
 </body>

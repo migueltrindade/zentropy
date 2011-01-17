@@ -34,7 +34,15 @@
  * @see template_process()
  */
 ?><?php print $doctype; ?>
-<html lang="<?php print $language->language; ?>" dir="<?php print $language->dir; ?>" <?php print $rdf->version . $rdf->namespaces; ?>>
+<?php $html_tag_attrs = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rdf->version}{$rdf->namespaces}";?>
+<!-- If you don't care about older browsers remove the following declarations -->
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie6" <![endif]-->
+<!--[if IE 7 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie7" <![endif]-->
+<!--[if IE 8 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie8" <![endif]-->
+<!--[if IE 9 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie9" <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html <?php echo $html_tag_attrs;?> class="no-js"> <!--<![endif]-->
+
 <head<?php print $rdf->profile; ?>>
 
   <?php print $head; ?>
@@ -54,9 +62,6 @@
   <!--[if LT IE 9]>
   <!--<script src="js/libs/html5.js"></script>
   <![endif]-->
-  <!--[if LTE IE 8]><style type="text/css" media="all">@import "<?php echo base_path() . path_to_theme() ?>/css/ie.css";?></style><![endif]-->
-  <!--[if LTE IE 7]><style type="text/css" media="all">@import "<?php echo base_path() . path_to_theme() ?>/css/ie7.css";?></style><![endif]-->
-  <!--[if LTE IE 6]><style type="text/css" media="all">@import "<?php echo base_path() . path_to_theme() ?>/css/ie6.css";?></style><![endif]-->
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css">  -->
@@ -82,21 +87,15 @@
   <![endif]-->
   
   <?php if (!user_is_logged_in() && theme_get_setting('ga_enable')) :?>
-  <!-- Google Analytics -->
-  <script type="text/javascript"> 
+  <!-- Google Analytics : mathiasbynens.be/notes/async-analytics-snippet -->
+  <script type="text/javascript">
     <!--//--><![CDATA[//><!--
-    try {
-      var _gaq = [['_setAccount', '<?php echo theme_get_setting('ga_trackingcode');?>'], ['_trackPageview']];
-      (function(d, t) {
-        var g = d.createElement(t),
-            s = d.getElementsByTagName(t)[0];
-            g.async = true;
-            g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g, s);
-      })(document, 'script');
-    } catch(err) {}
+    var _gaq=[['_setAccount','<?php echo theme_get_setting('ga_trackingcode');?'],['_trackPageview']];
+    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g,s)}(document,'script'));
     //--><!]]>
-  </script> 
+  </script>
   <?php endif; ?>
   
 </body>
