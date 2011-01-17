@@ -75,7 +75,6 @@
   <div id="page">
 
     <header id="header" role="banner">
-
       <div class="section clearfix">
 
       <?php if ($logo): ?>
@@ -205,10 +204,32 @@
 
     </div><!-- /#main -->
   </div><!-- /#main-wrapper -->
+  
+  <?php if ($page['triptych_first'] || $page['triptych_middle'] || $page['triptych_last']): ?>
+    <div id="triptych-wrapper"><div id="triptych" class="clearfix">
+      <?php print render($page['triptych_first']); ?>
+      <?php print render($page['triptych_middle']); ?>
+      <?php print render($page['triptych_last']); ?>
+    </div></div> <!-- /#triptych, /#triptych-wrapper -->
+  <?php endif; ?>
 
   <footer id="footer" role="contentinfo">
     <div class="section">
-    <?php print render($page['footer']); ?>
+
+    <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
+      <div id="footer-columns" class="clearfix">
+        <?php print render($page['footer_firstcolumn']); ?>
+        <?php print render($page['footer_secondcolumn']); ?>
+        <?php print render($page['footer_thirdcolumn']); ?>
+        <?php print render($page['footer_fourthcolumn']); ?>
+      </div> <!-- /#footer-columns -->
+    <?php endif; ?>
+    
+      <div id="footer-wrapper" class="clearfix">
+        <div class="section">
+        <?php print render($page['footer']); ?>
+        </div><!-- /.section -->
+      </div><!-- /#footer-wrapper -->
     </div><!-- /.section -->
   </footer><!-- /#footer -->
 
