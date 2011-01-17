@@ -7,14 +7,15 @@
 }
 
 /* uncomment these color rules to make the layout easier to see */
-#main           { background: #ccc; }
-#content        { background: #eee; }
-#sidebar-first  { background: #ccf; }
+#main { background: #ccc; }
+#content { background: #ccf; }
+.sidebar-first #content .section { background: #eee; }
+#sidebar-first { background: #ccf; }
 #sidebar-second { background: #fcc; }
-#main-menu      { background: #ffc; }
+#main-menu { background: #ffc; }
 #secondary-menu { background: #fcf; }
-#header         { background: #cff; }
-#footer         { background: #cfc; }
+#header { background: #cff; }
+#footer { background: #cfc; }
 
 /* Holy Grail Layout ---------------------------------------------------------
    ref: http://www.alistapart.com/articles/holygrail
@@ -54,7 +55,7 @@
 }
 
 .sidebar-first #content .section {
-  padding-left: 200px;   /* LC width */
+  margin-left: 200px;   /* LC width */
 }
 
 .sidebar-second #content .section {
