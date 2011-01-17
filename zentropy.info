@@ -4,7 +4,7 @@
 ; required information about the theme
 
 name = Zentropy
-description = Zentropy is a base theme for Drupal 7 which not only converts the core template files to HTML5 markup (based off of "Boron") but also includes many tweaks from "HTML5 Boilerplate" by Paul Irish and features we've all grown to love from the classic "Basic" theme.
+description = Zentropy is a highly-optimized and extensible base HTML5 theme for Drupal 7.
 screenshot = screenshot.jpg
 core = 7.x
 engine = phptemplate
