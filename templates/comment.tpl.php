@@ -58,7 +58,7 @@
 ?>
 <article class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
 
-  <header>
+  <header class="attribution">
     <?php print $picture ?>
 
     <?php if ($new): ?>

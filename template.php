@@ -53,6 +53,23 @@ function zentropy_preprocess_html(&$vars) {
     $vars['classes_array'][] = 'with-subnav';
   }
   
+  if (!empty($vars['page']['featured'])) {
+    $vars['classes_array'][] = 'featured';
+  }
+
+  if (!empty($vars['page']['triptych_first'])
+    || !empty($vars['page']['triptych_middle'])
+    || !empty($vars['page']['triptych_last'])) {
+    $vars['classes_array'][] = 'triptych';
+  }
+
+  if (!empty($vars['page']['footer_firstcolumn'])
+    || !empty($vars['page']['footer_secondcolumn'])
+    || !empty($vars['page']['footer_thirdcolumn'])
+    || !empty($vars['page']['footer_fourthcolumn'])) {
+    $vars['classes_array'][] = 'footer-columns';
+  }
+  
   /* Add extra classes to body for advanced theming */
   
   if ($vars['is_admin']) {
@@ -89,6 +106,61 @@ function zentropy_preprocess_page(&$vars) {
   if (isset($vars['node_title'])) {
     $vars['title'] = $vars['node_title'];
   }
+  // Always print the site name and slogan, but if they are toggled off, we'll
+  // just hide them visually.
+  $vars['hide_site_name']   = theme_get_setting('toggle_name') ? FALSE : TRUE;
+  $vars['hide_site_slogan'] = theme_get_setting('toggle_slogan') ? FALSE : TRUE;
+  if ($vars['hide_site_name']) {
+    // If toggle_name is FALSE, the site_name will be empty, so we rebuild it.
+    $vars['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  }
+  if ($vars['hide_site_slogan']) {
+    // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
+    $vars['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+  }
+  // Since the title and the shortcut link are both block level elements,
+  // positioning them next to each other is much simpler with a wrapper div.
+  if (!empty($vars['title_suffix']['add_or_remove_shortcut']) && $vars['title']) {
+    // Add a wrapper div using the title_prefix and title_suffix render elements.
+    $vars['title_prefix']['shortcut_wrapper'] = array(
+      '#markup' => '<div class="shortcut-wrapper clearfix">',
+      '#weight' => 100,
+    );
+    $vars['title_suffix']['shortcut_wrapper'] = array(
+      '#markup' => '</div>',
+      '#weight' => -99,
+    );
+    // Make sure the shortcut link is the first item in title_suffix.
+    $vars['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+  }
+}
+
+/**
+ * Implements hook_preprocess_maintenance_page().
+ */
+function zentropy_preprocess_maintenance_page(&$vars) {
+  if (!$vars['db_is_active']) {
+    unset($vars['site_name']);
+  }
+  drupal_add_css(drupal_get_path('theme', 'zentropy') . '/css/maintenance-page.css');
+}
+
+/**
+ * Override or insert variables into the maintenance page template.
+ */
+function zentropy_process_maintenance_page(&$vars) {
+  // Always print the site name and slogan, but if they are toggled off, we'll
+  // just hide them visually.
+  $vars['hide_site_name']   = theme_get_setting('toggle_name') ? FALSE : TRUE;
+  $vars['hide_site_slogan'] = theme_get_setting('toggle_slogan') ? FALSE : TRUE;
+  if ($vars['hide_site_name']) {
+    // If toggle_name is FALSE, the site_name will be empty, so we rebuild it.
+    $vars['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
+  }
+  if ($vars['hide_site_slogan']) {
+    // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
+    $vars['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+  }
 }
 
 /** 
@@ -121,11 +193,52 @@ function zentropy_preprocess_node(&$vars) {
   if ($vars['uid'] && $vars['uid'] === $GLOBALS['user']->uid) {
     $classes[] = 'node-mine'; // Node is authored by current user.
   }
+  
+   $vars['submitted'] = t('published by !username on !datetime', array('!username' => $vars['name'], '!datetime' => $vars['date']));
+  if ($vars['view_mode'] == 'full' && node_is_page($vars['node'])) {
+    $vars['classes_array'][] = 'node-full';
+  }
 }
 
 function zentropy_preprocess_block(&$vars, $hook) {
   // Add a striping class.
   $vars['classes_array'][] = 'block-' . $vars['zebra'];
+  
+  // In the header region visually hide block titles.
+  if ($vars['block']->region == 'header') {
+    $vars['title_attributes_array']['class'][] = 'element-invisible';
+  }
+}
+
+/**
+ * Implements theme_menu_tree().
+ */
+function zentropy_menu_tree($vars) {
+  return '<ul class="menu clearfix">' . $vars['tree'] . '</ul>';
+}
+
+/**
+ * Implements theme_field__field_type().
+ */
+function zentropy_field__taxonomy_term_reference($vars) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$vars['label_hidden']) {
+    $output .= '<h3 class="field-label">' . $vars['label'] . ': </h3>';
+  }
+
+  // Render the items.
+  $output .= ($vars['element']['#label_display'] == 'inline') ? '<ul class="links inline">' : '<ul class="links">';
+  foreach ($vars['items'] as $delta => $item) {
+    $output .= '<li class="taxonomy-term-reference-' . $delta . '"' . $vars['item_attributes'][$delta] . '>' . drupal_render($item) . '</li>';
+  }
+  $output .= '</ul>';
+
+  // Render the top-level DIV.
+  $output = '<div class="' . $vars['classes'] . (!in_array('clearfix', $vars['classes_array']) ? ' clearfix' : '') . '">' . $output . '</div>';
+
+  return $output;
 }
 
 /**

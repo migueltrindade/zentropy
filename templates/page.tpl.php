@@ -143,6 +143,18 @@
       </div><!-- /.section -->
     </header><!-- /#header -->
 
+  <?php if ($messages): ?>
+    <div id="messages"><div class="section clearfix">
+      <?php print $messages; ?>
+    </div></div> <!-- /.section, /#messages -->
+  <?php endif; ?>
+  
+  <?php if ($page['featured']): ?>
+    <div id="featured"><div class="section clearfix">
+      <?php print render($page['featured']); ?>
+    </div></div> <!-- /.section, /#featured -->
+  <?php endif; ?>
+
   <div id="main-wrapper">
     <div id="main" class="clearfix">
 
@@ -154,7 +166,6 @@
         <?php if ($breadcrumb): ?>
           <div id="breadcrumb"><?php print $breadcrumb; ?></div>
         <?php endif; ?>
-        <?php print $messages; ?>
         <?php print render($title_prefix); ?>
         <?php if ($title): ?>
           <h1 class="title" id="page-title"><?php print $title; ?></h1>

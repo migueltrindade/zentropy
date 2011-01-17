@@ -24,28 +24,31 @@ scripts[] = js/zentropy.core.js
 
 ; these are the stock regions
 regions[header] = Header
-regions[footer] = Footer
+regions[help] = Help
+regions[page_top] = Page top
+regions[page_bottom] = Page bottom
+regions[highlighted] = Highlighted
+
+regions[featured] = Featured
 regions[content_top] = Content top
 regions[content] = Content
 regions[content_bottom] = Content bottom
-regions[highlighted] = Highlighted
+
 regions[sidebar_first] = Sidebar first
 regions[sidebar_second] = Sidebar second
-regions[help] = Help
+
+regions[triptych_first] = Triptych first
+regions[triptych_middle] = Triptych middle
+regions[triptych_last] = Triptych last
+
+regions[footer_firstcolumn] = Footer first column
+regions[footer_secondcolumn] = Footer second column
+regions[footer_thirdcolumn] = Footer third column
+regions[footer_fourthcolumn] = Footer fourth column
+regions[footer] = Footer
 
 ; Options --------------------------------------------------------------------
 ; these are the checkboxes that are available on the theme settings page.
-
-; these are the stock options
-features[] = logo
-features[] = name
-features[] = slogan
-features[] = node_user_picture
-features[] = comment_user_picture
-features[] = comment_user_verification
-features[] = favicon
-features[] = main_menu
-features[] = secondary_menu
 
 ; additional theme settings
 settings[breadcrumb_display]   = yes
@@ -53,4 +56,4 @@ settings[breadcrumb_separator] = ' › '
 settings[breadcrumb_home]      = 1
 settings[breadcrumb_trailing]  = 0
 settings[breadcrumb_title]     = 0
-
+settings[shortcut_module_link] = 0
