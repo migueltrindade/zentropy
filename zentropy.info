@@ -15,6 +15,7 @@ engine = phptemplate
 
 stylesheets[screen][] = css/boilerplate.css
 stylesheets[screen][] = css/layout.css
+stylesheets[screen][] = css/style.css
 
 scripts[] = js/zentropy.core.js
 

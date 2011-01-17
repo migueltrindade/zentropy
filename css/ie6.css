@@ -1,5 +1,0 @@
-/* IE6 fixes... argh, why do we even bother! */
-
-* html #sidebar-first {
-  left: 160px;           /* RC width */
-}
