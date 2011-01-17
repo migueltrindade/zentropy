@@ -90,7 +90,7 @@
   <!-- Google Analytics : mathiasbynens.be/notes/async-analytics-snippet -->
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
-    var _gaq=[['_setAccount','<?php echo theme_get_setting('ga_trackingcode');?'],['_trackPageview']];
+    var _gaq=[['_setAccount','<?php echo theme_get_setting('ga_trackingcode');?>'],['_trackPageview']];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));

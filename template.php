@@ -3,7 +3,7 @@
 
 /**
  * @file
- * Contains theme override functions and preprocess functions for the zentropy theme.
+ * Contains theme override functions and preprocess & process functions for Zentropy theme.
  */
 
 /**
@@ -107,18 +107,22 @@ function zentropy_preprocess_page(&$vars) {
   if (isset($vars['node_title'])) {
     $vars['title'] = $vars['node_title'];
   }
+  
   // Always print the site name and slogan, but if they are toggled off, we'll
   // just hide them visually.
   $vars['hide_site_name']   = theme_get_setting('toggle_name') ? FALSE : TRUE;
   $vars['hide_site_slogan'] = theme_get_setting('toggle_slogan') ? FALSE : TRUE;
+  
   if ($vars['hide_site_name']) {
     // If toggle_name is FALSE, the site_name will be empty, so we rebuild it.
     $vars['site_name'] = filter_xss_admin(variable_get('site_name', 'Drupal'));
   }
+  
   if ($vars['hide_site_slogan']) {
     // If toggle_site_slogan is FALSE, the site_slogan will be empty, so we rebuild it.
     $vars['site_slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
   }
+  
   // Since the title and the shortcut link are both block level elements,
   // positioning them next to each other is much simpler with a wrapper div.
   if (!empty($vars['title_suffix']['add_or_remove_shortcut']) && $vars['title']) {

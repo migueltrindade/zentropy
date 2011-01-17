@@ -5,6 +5,7 @@ CONTENTS OF THIS FILE
  * Introduction
  * Features
  * Installation
+ * Useful Information
  * Developers
 
 INTRODUCTION
@@ -32,6 +33,7 @@ FEATURES
  * CSS3 Feature detection from Modernizr
  * Full HTML5 CSS Reset
  * Simple Google Analytics integration via theme settings
+ * Bartik compatibility (most of Bartik's goodness is maintained)
  * HTML5 doctype and meta content-type
  * Header and Footer sections marked up with header and footer elements
  * Navigation marked up with nav elements
@@ -63,6 +65,13 @@ INSTALLATION
   - Copy to: /path/to/theme/js/libs/dd_belatedpng.js
   - Add the class "png_bg" to any elements which have a PNG background
   - Uncomment lines 80 and 81 in html.tpl.php
+
+USEFUL INFORMATION
+
+ * Zentropy uses Paul Irish's strategy of using a conditional HTML tag to avoid using conditional
+   stylesheet includes. In order to apply a style for ie6 for example:
+   
+   - html.ie6 #selector { ... }
 
 DEVELOPERS
 
