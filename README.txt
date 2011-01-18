@@ -50,16 +50,10 @@ INSTALLATION
 
  * Extract the theme in your sites/all/themes/ directory and enable it
  
- * To enable Modernizr EITHER
- 
-    - Download and install the Modernizr module (http://drupal.org/project/modernizr)
-    
-    OR
-    
-    - Install the script manually:
-    - Download from: http://www.modernizr.com/
-    - Copy to: /path/to/theme/js/libs/modernizr-1.6.min.js
-    - Uncomment line 75 in html.tpl.php
+ * Install Modernizr:
+  - Download from: http://www.modernizr.com/
+  - Copy to: /path/to/theme/js/libs/modernizr-1.6.min.js
+  - Uncomment line 76 in html.tpl.php
  
  * If you are not using Modernizr or are using a custom download without the HTML5 Shim:
  * To support HTML5 in Internet Explorer and other legacy browsers please install HTML5Shim:
@@ -71,7 +65,7 @@ INSTALLATION
   - Download from: http://www.dillerdesign.com/experiment/DD_belatedPNG/
   - Copy to: /path/to/theme/js/libs/dd_belatedpng.js
   - Add the class "png_bg" to any elements which have a PNG background
-  - Uncomment lines 89 and 90 in html.tpl.php
+  - Uncomment lines 91 and 92 in html.tpl.php
 
 USEFUL INFORMATION
 
