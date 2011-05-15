@@ -1,0 +1,6 @@
+Zentropy 7.x-1.0-rc3, 2011-05-15
+--------------------------------
+- A lot of small code improvements
+- Removed script includes in templates to avoid conflicts with script loaders (namely HeadJS & LABjs)
+- Modernizr support handed off to Modernizr module
+- Refactored settings

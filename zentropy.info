@@ -1,4 +1,3 @@
-
 ; Theme Info -----------------------------------------------------------------
 ; required information about the theme
 
@@ -8,13 +7,12 @@ screenshot = screenshot.jpg
 core = 7.x
 
 ; Stylesheets  ---------------------------------------------------------------
-; We use [screen] instead of [all] to avoid browser styles affecting 
+; We use [screen] instead of [all] to avoid browser styles affecting
 ; other media types. IE stylesheets are loaded through template.php
 
 stylesheets[screen][] = css/boilerplate.css
 stylesheets[screen][] = css/layout.css
 stylesheets[screen][] = css/style.css
-
 
 scripts[] = js/zentropy.core.js
 
@@ -51,9 +49,13 @@ regions[footer] = Footer
 ; these are the checkboxes that are available on the theme settings page.
 
 ; additional theme settings
-settings[breadcrumb_display]   = yes
-settings[breadcrumb_separator] = ' › '
-settings[breadcrumb_home]      = 1
-settings[breadcrumb_trailing]  = 0
-settings[breadcrumb_title]     = 0
-settings[shortcut_module_link] = 0
+settings[zentropy_html5] = 0
+settings[zentropy_feed_icons] = 0
+settings[zentropy_ga_enable] = 0
+settings[zentropy_ga_trackingcode] = ''
+settings[zentropy_ga_trackroles] = ''
+settings[zentropy_ga_anonimize] = 0
+settings[zentropy_breadcrumb_separator] = '»'
+settings[zentropy_breadcrumb_hideonlyfront] = 1
+settings[zentropy_tabs_float] = 0
+settings[zentropy_tabs_node] = 1

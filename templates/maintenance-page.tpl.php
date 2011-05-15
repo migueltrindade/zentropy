@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Implementation to display a single Drupal page while offline.
@@ -23,35 +22,23 @@
 <head<?php print $rdf->profile; ?>>
 
   <?php print $head; ?>
-  
+
   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame  -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
   <!--  Mobile viewport optimized: j.mp/bplateviewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <!-- Prevent blocking -->
   <!--[if IE 6]><![endif]-->
-  
+
   <title><?php print $head_title; ?></title>
   <?php print $styles; ?>
-  <?php /*
-  ### IMPORTANT: If you are NOT using Modernizr OR are using a custom version without the HTML5 Shim,
-      you should install it manually and uncomment line 44 ###
-  <!-- Install html5shiv to enable full HTML5 support. See README.txt -->
-  <!--[if LT IE 9]>
-  <!--<script src="<?php echo $zentropy_path;?>/js/libs/html5.js"></script>
-  <![endif]-->
-  */ ?>
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="<?php echo $zentropy_path;?>/css/handheld.css">  -->
+  <link rel="stylesheet" media="handheld" href="<?php print $zentropy_path;?>/css/handheld.css">  -->
 
-  <?php if (!module_exists('modernizr')): ?>
-  <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <!-- IMPORTANT: Uncomment the following line and install Modernizr to enable full HTML5 support. See README.txt -->
-  <!--<script src="<?php echo $zentropy_path;?>/js/libs/modernizr-1.6.min.js"></script>-->
-  <?php endif;?>
+  <?php print $scripts; ?>
 
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes;?>>
@@ -109,20 +96,14 @@
 
   <?php print $page_bottom; ?>
 
-  <!-- Javascript at the bottom for fast page loading -->
-  <?php print $scripts; ?>
-  
-  <!-- Uncomment lines 118 and 119 to support transparent PNGs in IE6 and below -->
-  <!--[if lt IE 7 ]>
-    <!--<script src="<?php echo $zentropy_path;?>/js/libs/dd_belatedpng.js"></script>
-    <!--<script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
-  <![endif]-->
-  
   <?php if (zentropy_ga_enabled()) :?>
   <!-- Google Analytics : mathiasbynens.be/notes/async-analytics-snippet -->
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
     var _gaq=[['_setAccount','<?php echo theme_get_setting('ga_trackingcode');?>'],['_trackPageview']];
+    <?php if (theme_get_settings('zentropy_ga_anonimize')): ?>
+      _gaq.push (['_gat._anonymizeIp']);
+    <?php endif; ?>
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
     s.parentNode.insertBefore(g,s)}(document,'script'));

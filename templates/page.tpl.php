@@ -73,7 +73,11 @@
 
   <div id="page">
 
+    <?php if ($zentropy_html5): ?>
     <header id="header" role="banner">
+    <?php else: ?>
+    <div id="header" role="banner">
+    <?php endif; ?>
       <div class="section clearfix">
 
       <?php if ($logo): ?>
@@ -120,7 +124,7 @@
         )); ?>
         </nav><!-- /#navigation -->
       <?php endif; ?>
-      
+
     <?php if ($secondary_menu): ?>
       <nav id="secondary-menu" role="navigation">
         <?php print theme('links__system_secondary_menu', array(
@@ -139,14 +143,19 @@
     <?php endif; ?>
 
       </div><!-- /.section -->
+
+    <?php if ($zentropy_html5): ?>
     </header><!-- /#header -->
+    <?php else: ?>
+    </div><!-- /#header -->
+    <?php endif; ?>
 
   <?php if ($messages): ?>
     <div id="messages"><div class="section clearfix">
       <?php print $messages; ?>
     </div></div> <!-- /.section, /#messages -->
   <?php endif; ?>
-  
+
   <?php if ($page['featured']): ?>
     <div id="featured"><div class="section clearfix">
       <?php print render($page['featured']); ?>
@@ -176,11 +185,11 @@
         <?php if ($action_links): ?>
           <ul class="action-links"><?php print render($action_links); ?></ul>
         <?php endif; ?>
-        
+
         <?php print render($page['content_top']); ?>
         <?php print render($page['content']); ?>
         <?php print render($page['content_bottom']); ?>
-        
+
         <?php print $feed_icons; ?>
         </div><!-- /.section -->
       </div><!-- /#content -->
@@ -203,7 +212,7 @@
 
     </div><!-- /#main -->
   </div><!-- /#main-wrapper -->
-  
+
   <?php if ($page['triptych_first'] || $page['triptych_middle'] || $page['triptych_last']): ?>
     <div id="triptych-wrapper"><div id="triptych" class="clearfix">
       <?php print render($page['triptych_first']); ?>
@@ -223,7 +232,7 @@
         <?php print render($page['footer_fourthcolumn']); ?>
       </div> <!-- /#footer-columns -->
     <?php endif; ?>
-    
+
       <div id="footer-wrapper" class="clearfix">
         <div class="section">
         <?php print render($page['footer']); ?>

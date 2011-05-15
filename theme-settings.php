@@ -2,80 +2,145 @@
 
 /**
  * @file
- * Contains theme settings for the zentropy theme.
+ * Theme settings for the Zentropy
  */
-
 function zentropy_form_system_theme_settings_alter(&$form, &$form_state) {
+  // Get the default values from the .info file.
+  $defaults = zentropy_theme_get_default_settings();
 
-  /**
-   * Breadcrumb settings
-   * Copied from Zen
+  // Merge the saved variables and their default values.
+  $settings = array_merge($defaults, $saved_settings);
+
+  $form = array();
+
+  /*
+   * General Settings
    */
-  $form['breadcrumb'] = array(
-   '#type' => 'fieldset',
-   '#title' => t('Breadcrumb'),
+
+  $form['zentropy_general'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('General'),
   );
-  $form['breadcrumb']['breadcrumb_display'] = array(
-   '#type' => 'select',
-   '#title' => t('Display breadcrumb'),
-   '#default_value' => theme_get_setting('breadcrumb_display'),
-   '#options' => array(
-     'yes' => t('Yes'),
-     'no' => t('No'),
-   ),
+
+  $form['zentropy_general']['zentropy_html5'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable HTML5'),
+    '#default_value' => $settings['zentropy_html5'],
   );
-  $form['breadcrumb']['breadcrumb_separator'] = array(
-   '#type'  => 'textfield',
-   '#title' => t('Breadcrumb separator'),
-   '#description' => t('Text only. Dont forget to include spaces.'),
-   '#default_value' => theme_get_setting('breadcrumb_separator'),
-   '#size' => 8,
-   '#maxlength' => 10,
+
+  $form['zentropy_general']['zentropy_feed_icons'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Display Feed Icons'),
+    '#default_value' => $settings['zentropy_feed_icons'],
   );
-  $form['breadcrumb']['breadcrumb_home'] = array(
-   '#type' => 'checkbox',
-   '#title' => t('Show the homepage link in breadcrumbs'),
-   '#default_value' => theme_get_setting('breadcrumb_home'),
+
+  $form['zentropy_general']['clear_registry'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Rebuild theme registry on every page.'),
+    '#description' => t('During theme development, it can be very useful to continuously <a href="!link">rebuild the theme registry</a>. WARNING: this is a huge performance penalty and must be turned off on production websites.', array('!link' => 'http://drupal.org/node/173880#theme-registry')),
+    '#default_value' => $settings['clear_registry'],
   );
-  $form['breadcrumb']['breadcrumb_trailing'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Append a separator to the end of the breadcrumb'),
-    '#default_value' => theme_get_setting('breadcrumb_trailing'),
-    '#description'   => t('Useful when the breadcrumb is placed just before the title.'),
+
+  /*
+   * Floating tabs
+   */
+  $form['zentropy_tabs'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Tabs'),
   );
-  $form['breadcrumb']['breadcrumb_title'] = array(
-    '#type'          => 'checkbox',
-    '#title'         => t('Append the content title to the end of the breadcrumb'),
-    '#default_value' => theme_get_setting('breadcrumb_title'),
-    '#description'   => t('Useful when the breadcrumb is not placed just before the title.'),
+
+  $form['zentropy_tabs']['zentropy_tabs_float'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable floating tabs'),
+    '#default_value' => $settings['zentropy_tabs_float'],
+  );
+
+  $form['zentropy_tabs']['zentropy_tabs_node'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Only for nodes'),
+    '#default_value' => $settings['zentropy_tabs_node'],
+  );
+
+  /*
+   * Breadcrumb settings
+   */
+  $form['zentropy_breadcrumb'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Breadcrumb'),
+  );
+
+  $form['zentropy_breadcrumb']['zentropy_breadcrumb_hideonlyfront'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Hide the breadcrumb if the breadcrumb only contains the link to the front page.'),
+    '#default_value' => $settings['zentropy_breadcrumb_hideonlyfront'],
+  );
+
+  $form['zentropy_breadcrumb']['zentropy_breadcrumb_separator'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Breadcrumb separator'),
+    '#default_value' => $settings['zentropy_breadcrumb_separator'],
   );
 
   /**
    * Google Analytics settings
    */
-
   $roles_all = user_roles();
-  $roles_tracked = theme_get_setting('ga_trackroles');
+  $roles_tracked = $settings['zentropy_ga_trackroles'];
 
-  $form['ga'] = array(
-   '#type' => 'fieldset',
-   '#title' => t('Google Analytics'),
+  $form['zentropy_ga'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Google Analytics'),
   );
-  $form['ga']['ga_enable'] = array(
-   '#type'  => 'checkbox',
-   '#title' => t('Enable Google Analytics'),
-   '#default_value' => theme_get_setting('ga_enable'),
+  $form['zentropy_ga']['zentropy_ga_enable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Enable Google Analytics'),
+    '#default_value' => $settings['zentropy_ga_enable'],
   );
-  $form['ga']['ga_trackingcode'] = array(
-   '#type'  => 'textfield',
-   '#title' => t('Tracking code'),
-   '#default_value' => theme_get_setting('ga_trackingcode'),
+  $form['zentropy_ga']['zentropy_ga_trackingcode'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Tracking code'),
+    '#default_value' => $settings['zentropy_ga_trackingcode'],
   );
-  $form['ga']['ga_trackroles'] = array(
+  $form['zentropy_ga']['zentropy_ga_trackroles'] = array(
     '#type' => 'checkboxes',
-    '#title' => t('Track roles'),
+    '#title' => t('Exclude roles'),
     '#options' => $roles_all,
     '#description' => t('Exclude the following roles from being tracked'),
     '#default_value' => !empty($roles_tracked) ? array_values((array) $roles_tracked) : array(),
   );
+  $form['zentropy_ga']['zentropy_ga_anonimize'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Anonimize IP'),
+    '#description' => t('Tells Google Analytics to anonymize the information sent by the tracker objects by removing the last octet of the IP address prior to its storage. Note that this will slightly reduce the accuracy of geographic reporting.'),
+    '#default_value' => $settings['zentropy_ga_anonimize']
+  );
+}
+
+function zentropy_theme_get_default_settings() {
+  $themes = list_themes();
+
+  // Get the default values from the .info file.
+  $defaults = !empty($themes['zentropy']->info['settings']) ? $themes['zentropy']->info['settings'] : array();
+
+  if (!empty($defaults)) {
+    // Get the theme settings saved in the database.
+    $settings = theme_get_settings('zentropy');
+    // Don't save the toggle_node_info_ variables.
+    if (module_exists('node')) {
+      foreach (node_get_types() as $type => $name) {
+        unset($settings['toggle_node_info_' . $type]);
+      }
+    }
+    // Save default theme settings.
+    variable_set(
+      str_replace('/', '_', 'theme_zentropy_settings'), array_merge($defaults, $settings)
+    );
+    // If the active theme has been loaded, force refresh of Drupal internals.
+    if (!empty($GLOBALS['theme_key'])) {
+      theme_get_setting('', TRUE);
+    }
+  }
+
+  // Return the default settings.
+  return $defaults;
 }
