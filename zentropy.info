@@ -49,7 +49,6 @@ regions[footer] = Footer
 ; these are the checkboxes that are available on the theme settings page.
 
 ; additional theme settings
-settings[zentropy_html5] = 0
 settings[zentropy_feed_icons] = 0
 settings[zentropy_ga_enable] = 0
 settings[zentropy_ga_trackingcode] = ''
