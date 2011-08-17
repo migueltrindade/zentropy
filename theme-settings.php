@@ -22,12 +22,6 @@ function zentropy_form_system_theme_settings_alter(&$form, &$form_state) {
     '#title' => t('General'),
   );
 
-  $form['zentropy_general']['zentropy_html5'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Enable HTML5'),
-    '#default_value' => $settings['zentropy_html5'],
-  );
-
   $form['zentropy_general']['zentropy_feed_icons'] = array(
     '#type' => 'checkbox',
     '#title' => t('Display Feed Icons'),
