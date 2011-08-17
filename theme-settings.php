@@ -124,12 +124,12 @@ function zentropy_theme_get_default_settings() {
 
   if (!empty($defaults)) {
     // Get the theme settings saved in the database.
-    $settings = theme_get_settings('zentropy');
+    $settings = theme_get_setting('zentropy');
     // Don't save the toggle_node_info_ variables.
     if (module_exists('node')) {
-      foreach (node_get_types() as $type => $name) {
-        unset($settings['toggle_node_info_' . $type]);
-      }
+      //foreach (node_get_types() as $type => $name) {
+        //unset($settings['toggle_node_info_' . $type]);
+      //}
     }
     // Save default theme settings.
     variable_set(

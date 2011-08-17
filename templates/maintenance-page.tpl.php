@@ -9,16 +9,14 @@
  * @see template_preprocess_maintenance_page()
  * @see zentropy_process_maintenance_page()
  */
-?><?php print $doctype; ?>
-<?php $html_tag_attrs = "xml:lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rdf->version}{$rdf->namespaces}";?>
-<!-- If you don't care about older browsers remove the following declarations -->
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie6" <![endif]-->
-<!--[if IE 7 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie7" <![endif]-->
-<!--[if IE 8 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie8" <![endif]-->
-<!--[if IE 9 ]> <html <?php echo $html_tag_attrs;?> class="no-js ie9" <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html <?php echo $html_tag_attrs;?> class="no-js"> <!--<![endif]-->
-
+$html_attributes = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rdf->version}{$rdf->namespaces}";
+?>
+<?php print $doctype; ?>
+<!--[if IE 6]><![endif]-->
+<!--[if IE 7 ]><html <?php print $html_attributes; ?> class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html <?php print $html_attributes; ?> class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html <?php print $html_attributes; ?> class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html <?php print $html_attributes; ?> class="no-js"><!--<![endif]-->
 <head<?php print $rdf->profile; ?>>
 
   <?php print $head; ?>

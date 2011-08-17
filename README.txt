@@ -67,6 +67,7 @@ AUTHORS
 
 * Alex Weber (alexweber) - http://drupal.org/user/850856 & http://www.alexweber.com.br
 * Leandro Nunes (lnunesbr) - http://drupal.org/user/324393 & http://www.nunesweb.com
+* Miguel Trindade (migueltrindade) - http://drupal.org/user/690418/ & http://www.migueltrindade.com.br
 
 
 SPONSORS

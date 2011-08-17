@@ -18,11 +18,9 @@ if (theme_get_setting('clear_registry')) {
  * Changes the default meta content-type tag to the shorter HTML5 version
  */
 function zentropy_html_head_alter(&$head_elements) {
-  if (theme_get_setting('zentropy_html5')) {
-    $head_elements['system_meta_content_type']['#attributes'] = array(
-      'charset' => 'utf-8'
-    );
-  }
+  $head_elements['system_meta_content_type']['#attributes'] = array(
+    'charset' => 'utf-8'
+  );
 }
 
 /**
@@ -31,9 +29,7 @@ function zentropy_html_head_alter(&$head_elements) {
  * Changes the search form to use the HTML5 "search" input attribute
  */
 function zentropy_preprocess_search_block_form(&$vars) {
-  if (theme_get_setting('zentropy_html5')) {
-    $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
-  }
+  $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
 }
 
 /**
@@ -48,6 +44,9 @@ function zentropy_preprocess(&$vars, $hook) {
  * Implements template_preprocess_html().
  */
 function zentropy_preprocess_html(&$vars) {
+  
+  $vars['doctype'] = (module_exists('rdf')) ? '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN"' . "\n" . '"http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">' : '<!DOCTYPE html>' . "\n";
+  
   $vars['doctype'] = _zentropy_doctype();
   $vars['rdf'] = _zentropy_rdf($vars);
 
@@ -201,8 +200,11 @@ function zentropy_preprocess_node(&$vars) {
   if ($vars['uid'] && $vars['uid'] === $GLOBALS['user']->uid) {
     $classes[] = 'node-mine'; // Node is authored by current user.
   }
-
-  $vars['submitted'] = t('published by !username on !datetime', array('!username' => $vars['name'], '!datetime' => $vars['date']));
+  
+  $vars['submitted'] = t('Submitted by !username on ', array('!username' => $vars['name']));
+  $vars['submitted_date'] = t('!datetime', array('!datetime' => $vars['date']));
+  $vars['submitted_pubdate'] = format_date($vars['created'], 'custom', 'Y-m-d\TH:i:s');
+  
   if ($vars['view_mode'] == 'full' && node_is_page($vars['node'])) {
     $vars['classes_array'][] = 'node-full';
   }
@@ -350,11 +352,7 @@ function zentropy_id_safe($string) {
  * Generate doctype for templates
  */
 function _zentropy_doctype() {
-  if (theme_get_setting('zentropy_html5')) {
-    return (module_exists('rdf')) ? '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN"' . "\n" . '"http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">' : '<!DOCTYPE html>' . "\n";
-  } else {
-    return (module_exists('rdf')) ? '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"' . "\n" . '"http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">' : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . "\n" . '"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
-  }
+  return (module_exists('rdf')) ? '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN"' . "\n" . '"http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">' : '<!DOCTYPE html>' . "\n";
 }
 
 /**

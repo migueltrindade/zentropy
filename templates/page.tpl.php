@@ -73,11 +73,9 @@
 
   <div id="page">
 
-    <?php if ($zentropy_html5): ?>
+    
     <header id="header" role="banner">
-    <?php else: ?>
-    <div id="header" role="banner">
-    <?php endif; ?>
+      
       <div class="section clearfix">
 
       <?php if ($logo): ?>
@@ -144,11 +142,7 @@
 
       </div><!-- /.section -->
 
-    <?php if ($zentropy_html5): ?>
     </header><!-- /#header -->
-    <?php else: ?>
-    </div><!-- /#header -->
-    <?php endif; ?>
 
   <?php if ($messages): ?>
     <div id="messages"><div class="section clearfix">

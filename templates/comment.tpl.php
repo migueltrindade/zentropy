@@ -70,10 +70,11 @@
 
     <p class="submitted">
       <?php print $permalink; ?>
-      <?php
+      <time><?php
         print t('Submitted by !username on !datetime.',
           array('!username' => $author, '!datetime' => $created));
       ?>
+      </time>
     </p>
   </header>
 

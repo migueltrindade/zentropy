@@ -89,12 +89,14 @@
       <?php print render($title_suffix); ?>
 
       <?php if ($display_submitted): ?>
-        <p class="submitted">
-          <?php
-            print t('Submitted by !username on !datetime',
-              array('!username' => $name, '!datetime' => $date));
-          ?>
-        </p>
+        
+      <p class="submitted">
+        <?php print $submitted; ?>
+        <time pubdate datetime="<?php print $submitted_pubdate; ?>">
+        <?php print $submitted_date; ?>
+        </time>
+      </p>
+        
       <?php endif; ?>
     </header>
   <?php endif; ?>

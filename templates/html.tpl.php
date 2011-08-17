@@ -31,13 +31,16 @@
  * @see template_preprocess_html()
  * @see template_process()
  */
-?><?php print $doctype; ?>
-<html lang="<?php print $language->language;?>" dir="<?php print $language->dir;?>" <?php if (module_exists('rdf')) { print $rdf->version; print $rdf->namespaces; } ?> class="no-js">
-<head<?php print module_exists('rdf') ? $rdf->profile : 'http://www.w3.org/1999/xhtml/vocab'; ?>>
+$html_attributes = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rdf->version}{$rdf->namespaces}";
+?>
+<?php print $doctype; ?>
+<!--[if IE 7 ]><html <?php print $html_attributes; ?> class="no-js ie7"><![endif]-->
+<!--[if IE 8 ]><html <?php print $html_attributes; ?> class="no-js ie8"><![endif]-->
+<!--[if IE 9 ]><html <?php print $html_attributes; ?> class="no-js ie9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html <?php print $html_attributes; ?> class="no-js"><!--<![endif]-->
+<head<?php print $rdf->profile; ?>>
 
   <?php print $head; ?>
-
-  <meta charset="utf-8" />
 
   <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame  -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
