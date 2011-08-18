@@ -339,6 +339,9 @@ function zentropy_tabs_float() {
  */
 
 function zentropy_id_safe($string) {
+  // Strip accents
+  $accents = '/&([A-Za-z]{1,2})(tilde|grave|acute|circ|cedil|uml|lig);/';
+  $string = preg_replace($accents, '$1', htmlentities(utf8_decode($string)));
   // Replace with dashes anything that isn't A-Z, numbers, dashes, or underscores.
   $string = strtolower(preg_replace('/[^a-zA-Z0-9_-]+/', '-', $string));
   // If the first character is not a-z, add 'n' in front.
