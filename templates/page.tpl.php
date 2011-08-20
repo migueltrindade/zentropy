@@ -164,6 +164,7 @@
         <?php if ($page['highlighted']): ?>
           <div id="highlighted"><?php print render($page['highlighted']); ?></div>
         <?php endif; ?>
+         
         <?php if ($breadcrumb): ?>
           <div id="breadcrumb"><?php print $breadcrumb; ?></div>
         <?php endif; ?>

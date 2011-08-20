@@ -52,6 +52,7 @@ $html_attributes = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rd
   <!--[if IE 6]><![endif]-->
 
   <title><?php print $head_title; ?></title>
+  
   <?php print $styles; ?>
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
@@ -66,12 +67,12 @@ $html_attributes = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rd
   <?php print $page; ?>
   <?php print $page_bottom; ?>
 
-  <?php if (zentropy_ga_enabled()) :?>
+  <?php if (zentropy_ga_enabled()): ?>
   <!-- Google Analytics : mathiasbynens.be/notes/async-analytics-snippet -->
   <script type="text/javascript">
     <!--//--><![CDATA[//><!--
-    var _gaq=[['_setAccount','<?php print theme_get_setting('ga_trackingcode');?>'],['_trackPageview']];
-    <?php if (theme_get_settings('zentropy_ga_anonimize')): ?>
+    var _gaq=[['_setAccount','<?php print theme_get_setting('zentropy_ga_trackingcode');?>'],['_trackPageview']];
+    <?php if (theme_get_setting('zentropy_ga_anonimize')): ?>
       _gaq.push (['_gat._anonymizeIp']);
     <?php endif; ?>
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;

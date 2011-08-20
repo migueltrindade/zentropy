@@ -4,8 +4,9 @@
  * @file
  * Contains theme override functions and process & preprocess functions for Zentropy
  */
+
 // Auto-rebuild the theme registry during theme development.
-if (theme_get_setting('clear_registry')) {
+if (theme_get_setting('zentropy_clear_registry')) {
   // Rebuild .info data.
   system_rebuild_theme_data();
   // Rebuild theme registry.
@@ -37,15 +38,12 @@ function zentropy_preprocess_search_block_form(&$vars) {
  */
 function zentropy_preprocess(&$vars, $hook) {
   $vars['zentropy_path'] = base_path() . path_to_theme();
-  $vars['zentropy_html5'] = theme_get_setting('zentropy_html5');
 }
 
 /**
  * Implements template_preprocess_html().
  */
 function zentropy_preprocess_html(&$vars) {
-  
-  $vars['doctype'] = (module_exists('rdf')) ? '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN"' . "\n" . '"http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">' : '<!DOCTYPE html>' . "\n";
   
   $vars['doctype'] = _zentropy_doctype();
   $vars['rdf'] = _zentropy_rdf($vars);
@@ -122,6 +120,7 @@ function zentropy_preprocess_html(&$vars) {
  * Implements template_preprocess_page().
  */
 function zentropy_preprocess_page(&$vars) {
+  
   if (isset($vars['node_title'])) {
     $vars['title'] = $vars['node_title'];
   }
@@ -149,6 +148,10 @@ function zentropy_preprocess_page(&$vars) {
     );
     // Make sure the shortcut link is the first item in title_suffix.
     $vars['title_suffix']['add_or_remove_shortcut']['#weight'] = -100;
+  }
+  
+  if(!theme_get_setting('zentropy_feed_icons')) {
+    $vars['feed_icons'] = '';
   }
 }
 
@@ -258,22 +261,31 @@ function zentropy_field__taxonomy_term_reference($vars) {
  *  Return a themed breadcrumb trail
  */
 function zentropy_breadcrumb($vars) {
+  
   $breadcrumb = isset($vars['breadcrumb']) ? $vars['breadcrumb'] : array();
-
+  
   if (theme_get_setting('zentropy_breadcrumb_hideonlyfront')) {
     $condition = count($breadcrumb) > 1;
   } else {
     $condition = !empty($breadcrumb);
   }
-
+  
+  if(theme_get_setting('zentropy_breadcrumb_showtitle')) {
+    $title = drupal_get_title();
+    if(!empty($title)) {
+      $condition = true;
+      $breadcrumb[] = $title;
+    }
+  }
+  
   $separator = theme_get_setting('zentropy_breadcrumb_separator');
 
   if (!$separator) {
     $separator = '»';
   }
-
+  
   if ($condition) {
-    return '<div id="breadcrumb">' . implode(" {$separator} ", $breadcrumb) . '</div>';
+    return implode(" {$separator} ", $breadcrumb);
   }
 }
 
