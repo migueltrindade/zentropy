@@ -31,7 +31,6 @@ FEATURES
 
  * Extra regions and classes for more theming flexibility
  * Performance and compatibility improvements from HTML5 Boilerplate
- * CSS3 Feature detection from Modernizr
  * Full HTML5 CSS Reset
  * Simple Google Analytics integration via theme settings
  * Bartik compatibility (most of Bartik's goodness is maintained)

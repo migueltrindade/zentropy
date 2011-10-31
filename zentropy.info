@@ -8,7 +8,7 @@ core = 7.x
 
 ; Stylesheets  ---------------------------------------------------------------
 ; We use [screen] instead of [all] to avoid browser styles affecting
-; other media types. IE stylesheets are loaded through template.php
+; other media types.
 
 stylesheets[screen][] = css/boilerplate.css
 stylesheets[screen][] = css/layout.css

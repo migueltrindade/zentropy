@@ -54,10 +54,7 @@ $html_attributes = "lang=\"{$language->language}\" dir=\"{$language->dir}\" {$rd
   <title><?php print $head_title; ?></title>
   
   <?php print $styles; ?>
-
-  <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-  <link rel="stylesheet" media="handheld" href="<?php print $zentropy_path;?>/css/handheld.css">  -->
-
+  
   <?php print $scripts; ?>
 
 </head>
