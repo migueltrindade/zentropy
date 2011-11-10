@@ -87,19 +87,13 @@
       <?php if ($site_name || $site_slogan): ?>
         <div id="name-and-slogan">
           <?php if ($site_name): ?>
-            <?php if ($title): ?>
-              <div id="site-name">
-                <strong><a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a></strong>
-              </div><!-- /#site-name -->
-            <?php else: /* Use h1 when the content title is empty */ ?>
-              <h1 id="site-name">
-                <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
-              </h1>
-            <?php endif; ?>
+            <h1 id="site-name">
+              <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home"><span><?php print $site_name; ?></span></a>
+            </h1>
           <?php endif; ?>
 
           <?php if ($site_slogan): ?>
-            <div id="site-slogan"><?php print $site_slogan; ?></div>
+            <h2 id="site-slogan"><?php print $site_slogan; ?></h2>
           <?php endif; ?>
         </div><!-- /#name-and-slogan -->
       <?php endif; ?>
@@ -157,6 +151,7 @@
   <?php endif; ?>
 
   <div id="main-wrapper">
+    
     <div id="main" class="clearfix">
 
       <div id="content" class="column" role="main">
@@ -215,8 +210,12 @@
       <?php print render($page['triptych_last']); ?>
     </div></div> <!-- /#triptych, /#triptych-wrapper -->
   <?php endif; ?>
-
+    
+    
+  <?php if($page['footer'] || $page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
+  
   <footer id="footer" role="contentinfo">
+    
     <div class="section">
 
     <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
@@ -234,8 +233,11 @@
         </div><!-- /.section -->
       </div><!-- /#footer-wrapper -->
     </div><!-- /.section -->
+    
   </footer><!-- /#footer -->
-
+  
+  <?php endif; ?>
+  
   </div><!-- /#page -->
 </div><!-- /#page-wrapper -->
 
