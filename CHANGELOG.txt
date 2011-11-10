@@ -1,6 +1,4 @@
-Zentropy 7.x-1.0-rc3, 2011-05-15
+7.x-1.0, 2011-11-10
 --------------------------------
-- A lot of small code improvements
-- Removed script includes in templates to avoid conflicts with script loaders (namely HeadJS & LABjs)
-- Modernizr support handed off to Modernizr module
-- Refactored settings
+- Floating Tabs fix
+- Change presentation of site name and slogan
