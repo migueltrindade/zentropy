@@ -103,12 +103,12 @@ function zentropy_preprocess_html(&$vars) {
     if (arg(0) == 'node') {
       if (arg(1) == 'add') {
         if ($section == 'node') {
-          array_pop($body_classes); // Remove 'section-node'
+          array_pop($vars['classes_array']); // Remove 'section-node'
         }
         $body_classes[] = 'section-node-add'; // Add 'section-node-add'
       } elseif (is_numeric(arg(1)) && (arg(2) == 'edit' || arg(2) == 'delete')) {
         if ($section == 'node') {
-          array_pop($body_classes); // Remove 'section-node'
+          array_pop($vars['classes_array']); // Remove 'section-node'
         }
         $body_classes[] = 'section-node-' . arg(2); // Add 'section-node-edit' or 'section-node-delete'
       }

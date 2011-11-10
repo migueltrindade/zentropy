@@ -76,8 +76,35 @@
   margin-left: -160px;   /* RC width */
 }
 
+.region-triptych-first,
+.region-triptych-middle,
+.region-triptych-last,
+.region-footer-firstcolumn,
+.region-footer-secondcolumn,
+.region-footer-thirdcolumn,
+.region-footer-fourthcolumn {
+  display: inline;
+  float: left; /* LTR */
+  position: relative;
+}
+
+.region-triptych-first,
+.region-triptych-middle,
+.region-triptych-last {
+  margin: 20px 20px 30px;
+  width: 280px;
+}
+.region-footer-firstcolumn,
+.region-footer-secondcolumn,
+.region-footer-thirdcolumn,
+.region-footer-fourthcolumn {
+  padding: 0 10px;
+  width: 220px;
+}
+
+
 /**
- * @file tab styles
+ * Tab styles
  */
 div.tabs {
   border-bottom: 0 none;
@@ -266,8 +293,8 @@ ul.secondary li.active a {
   padding: 0;
   border-bottom: 0 none;
   position: relative;
-  left: 10px;
-  top: 8px;
+  left: 0;
+  top:10px;
   -moz-box-shadow: 0px 0px 4px #222222;
   -webkit-box-shadow: 0px 0px 4px #222222;
   box-shadow: 0px 0px 4px #222222;
@@ -278,6 +305,7 @@ ul.secondary li.active a {
   display: block;
   padding: 0 4px;
   margin: 0;
+  background: #FFF;
 }
 #floating-tabs ul.secondary a.active {
   border-bottom: 0;

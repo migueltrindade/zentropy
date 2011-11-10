@@ -218,20 +218,23 @@
     
     <div class="section">
 
-    <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
+      <?php if ($page['footer_firstcolumn'] || $page['footer_secondcolumn'] || $page['footer_thirdcolumn'] || $page['footer_fourthcolumn']): ?>
       <div id="footer-columns" class="clearfix">
         <?php print render($page['footer_firstcolumn']); ?>
         <?php print render($page['footer_secondcolumn']); ?>
         <?php print render($page['footer_thirdcolumn']); ?>
         <?php print render($page['footer_fourthcolumn']); ?>
       </div> <!-- /#footer-columns -->
-    <?php endif; ?>
-
+      <?php endif; ?>
+      
+      <?php if($page['footer']): ?>
       <div id="footer-wrapper" class="clearfix">
         <div class="section">
-        <?php print render($page['footer']); ?>
+          <?php print render($page['footer']); ?>
         </div><!-- /.section -->
       </div><!-- /#footer-wrapper -->
+      <?php endif; ?>
+      
     </div><!-- /.section -->
     
   </footer><!-- /#footer -->
